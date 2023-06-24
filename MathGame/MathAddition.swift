@@ -123,4 +123,12 @@ class Game {
             }
         }
     }
+    
+    public func isValueCorrect(user:String, expected:String) -> Bool {
+        if (user == expected) {
+            return true
+        } else {
+            return false
+        }
+    }
 }

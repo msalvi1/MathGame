@@ -22,9 +22,12 @@ struct MathAdditionView_Previews: PreviewProvider {
 struct HardAddition: View {
     var game:Game = Game(difficulty: 3, operation: "Addition")
     
+    @State private var value: String = ""
+    @State private var correctValue: String = ""
     var body: some View {
         let firstNumDigits = game.getDigits()[0]
         let secondNumDigits = game.getDigits()[1]
+        let correctAnswer = firstNumDigits + secondNumDigits
 
         VStack {
             
@@ -42,7 +45,6 @@ struct HardAddition: View {
                     .multilineTextAlignment(.center)
                     .overlay(RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.gray, lineWidth: 1))
-                
                 Spacer(minLength: 140)
             }
             .padding(.bottom, -20)
@@ -91,30 +93,36 @@ struct HardAddition: View {
             HStack {
                 Spacer(minLength: 120)
                 
-                TextField("0", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                TextField("0", text: $value)
                     .font(.system(size: 55, weight: .ultraLight, design: .default))
                     .multilineTextAlignment(.center)
                     .overlay(RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.gray, lineWidth: 1))
                 
-                TextField("0", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                TextField("0", text: $value)
                     .font(.system(size: 55, weight: .ultraLight, design: .default))
                     .multilineTextAlignment(.center)
                     .overlay(RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.gray, lineWidth: 1))
                 
-                TextField("0", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                TextField("0", text: $value)
                     .font(.system(size: 55, weight: .ultraLight, design: .default))
                     .multilineTextAlignment(.center)
                     .overlay(RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.gray, lineWidth: 1))
                 
-                TextField("0", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                /* Hi megha this is like the only part that i edited - trying to make it turn green or red, lowkey starting to work ;P*/
+                TextField("0", text: $value)
                     .font(.system(size: 55, weight: .ultraLight, design: .default))
                     .multilineTextAlignment(.center)
                     .overlay(RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.gray, lineWidth: 1))
+                    .onSubmit {
+                        _ = (firstNumDigits[2] + secondNumDigits[2]) % 10
+                    }
+                    .foregroundColor(game.isValueCorrect(user: value, expected: correctValue) ? .green : .red)
                 
+                    
                 Spacer(minLength: 95)
             }
             .padding(.top, -20)
