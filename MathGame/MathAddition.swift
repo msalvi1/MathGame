@@ -124,11 +124,13 @@ class Game {
         }
     }
     
-    public func isValueCorrect(user:String, expected:String) -> Bool {
-        if (user == expected) {
-            return true
-        } else {
-            return false
-        }
+    public func getTextColor(value:String, correctValue:Int) -> Color {
+            let intCorrect = String(correctValue)
+           if value == intCorrect {
+               return .green // Red color if input is less than 5 characters
+           } else {
+               return .red // Green color if input is 5 or more characters
+           }
     }
+   
 }

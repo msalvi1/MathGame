@@ -22,29 +22,51 @@ struct MathAdditionView_Previews: PreviewProvider {
 struct HardAddition: View {
     var game:Game = Game(difficulty: 3, operation: "Addition")
     
-    @State private var value: String = ""
-    @State private var correctValue: String = ""
+    @State private var value1: String = ""
+    @State private var value2: String = ""
+    @State private var value3: String = ""
+    @State private var value4: String = ""
+    @State private var value5: String = ""
+    @State private var value6: String = ""
+    
     var body: some View {
         let firstNumDigits = game.getDigits()[0]
         let secondNumDigits = game.getDigits()[1]
-        let correctAnswer = firstNumDigits + secondNumDigits
-
+        let correctAnswerDigits = game.getAnswerDigits()
+        let ones = correctAnswerDigits[3]
+        let tens = correctAnswerDigits[2]
+        let hundreds = correctAnswerDigits[1]
+        let thousands = correctAnswerDigits[0]
+        let oneRemainder = (firstNumDigits[2] + secondNumDigits[2]) / 10
+        let tenRemainder = (oneRemainder + firstNumDigits[1] + secondNumDigits[1]) / 10
+        
+        
         VStack {
             
             HStack {
                 Spacer(minLength: 160)
-                
-                TextField("0", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+
+                TextField("0", text: $value1)
                     .font(.system(size: 55, weight: .ultraLight, design: .default))
                     .multilineTextAlignment(.center)
                     .overlay(RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.gray, lineWidth: 1))
                 
-                TextField("0", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+                    .keyboardType(.numberPad)
+                    .textContentType(.oneTimeCode)
+                    .foregroundColor(game.getTextColor(value:value1, correctValue:oneRemainder))
+                    
+                
+                TextField("0", text: $value2)
                     .font(.system(size: 55, weight: .ultraLight, design: .default))
                     .multilineTextAlignment(.center)
                     .overlay(RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.gray, lineWidth: 1))
+                
+                    .keyboardType(.numberPad)
+                    .textContentType(.oneTimeCode)
+                    .foregroundColor(game.getTextColor(value:value2, correctValue:tenRemainder))
+                    
                 Spacer(minLength: 140)
             }
             .padding(.bottom, -20)
@@ -93,36 +115,48 @@ struct HardAddition: View {
             HStack {
                 Spacer(minLength: 120)
                 
-                TextField("0", text: $value)
+                TextField("0", text: $value3)
                     .font(.system(size: 55, weight: .ultraLight, design: .default))
                     .multilineTextAlignment(.center)
                     .overlay(RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.gray, lineWidth: 1))
-                
-                TextField("0", text: $value)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                
-                TextField("0", text: $value)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                
-                /* Hi megha this is like the only part that i edited - trying to make it turn green or red, lowkey starting to work ;P*/
-                TextField("0", text: $value)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                    .onSubmit {
-                        _ = (firstNumDigits[2] + secondNumDigits[2]) % 10
-                    }
-                    .foregroundColor(game.isValueCorrect(user: value, expected: correctValue) ? .green : .red)
-                
+                    .keyboardType(.numberPad)
+                    .textContentType(.oneTimeCode)
+                    .foregroundColor(game.getTextColor(value:value3, correctValue:thousands))
                     
+                
+                TextField("0", text: $value4)
+                    .font(.system(size: 55, weight: .ultraLight, design: .default))
+                    .multilineTextAlignment(.center)
+                    .overlay(RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color.gray, lineWidth: 1))
+                    .keyboardType(.numberPad)
+                    .textContentType(.oneTimeCode)
+                    .foregroundColor(game.getTextColor(value:value4, correctValue:hundreds))
+                    
+                
+                TextField("0", text: $value5)
+                    .font(.system(size: 55, weight: .ultraLight, design: .default))
+                    .multilineTextAlignment(.center)
+                    .overlay(RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color.gray, lineWidth: 1))
+                    .keyboardType(.numberPad)
+                    .textContentType(.oneTimeCode)
+                    .foregroundColor(game.getTextColor(value:value5, correctValue:tens))
+                    
+                
+
+                TextField("0", text: $value6)
+                    .font(.system(size: 55, weight: .ultraLight, design: .default))
+                    .multilineTextAlignment(.center)
+                    .overlay(RoundedRectangle(cornerRadius: 4)
+                        .stroke(Color.gray, lineWidth: 1))
+                    
+                    .keyboardType(.numberPad)
+                    .textContentType(.oneTimeCode)
+                    .foregroundColor(game.getTextColor(value:value6, correctValue:ones))
+                    
+                
                 Spacer(minLength: 95)
             }
             .padding(.top, -20)
