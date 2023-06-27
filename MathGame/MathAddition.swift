@@ -132,5 +132,16 @@ class Game {
                return .red // Green color if input is 5 or more characters
            }
     }
+    
+    public func userAnswerCorrect(onesString:String, tensString:String, hundredsString:String, thousandsString:String, correctAnswer:Int) -> Bool {
+        let ones = Int(onesString) ?? -1
+        let tens = Int(tensString) ?? -1
+        let hundreds = Int(hundredsString) ?? -1
+        let thousands = Int(thousandsString) ?? -1
+        
+        let userAnswer = ones + (10*tens) + (100*hundreds) + (1000*thousands)
+        
+        return userAnswer == correctAnswer
+    }
    
 }

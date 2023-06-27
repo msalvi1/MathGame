@@ -10,29 +10,49 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Math Game")
-                    .font(.system(size: 48, weight: .ultraLight, design: .default))
-                
-                HStack {
-                    Image(systemName: "divide")
-                        .resizable()
-                        .frame(width: 100, height: 100, alignment: .center)
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.blue)
-                        .padding()
-                    Image(systemName: "multiply")
-                        .resizable()
-                        .frame(width: 100, height: 100, alignment: .center)
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.blue)
-                        .padding()
-                }
-                NavigationLink(
-                    destination: settingsPage(),
-                    label: {
-                        nextButton(color:.blue)})
-            }
+            Color.pink.opacity(0.19)
+                .edgesIgnoringSafeArea(.all)
+                .overlay(
+                    VStack {
+                        HStack {
+                            Image(systemName: "plus")
+                                .resizable()
+                                .frame(width: 100, height: 100, alignment: .center)
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundColor(.pink)
+                                .padding()
+                            Image(systemName: "minus")
+                                .resizable()
+                                .frame(width: 100, height: 10, alignment: .center)
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundColor(.pink)
+                                .padding()
+                        }
+                        
+                        Text("Math Game")
+                            .font(.system(size: 48, weight: .ultraLight, design: .default))
+                            .foregroundColor(Color.pink.opacity(2))
+                        
+                        HStack {
+                            Image(systemName: "divide")
+                                .resizable()
+                                .frame(width: 100, height: 100, alignment: .center)
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundColor(.pink)
+                                .padding()
+                            Image(systemName: "multiply")
+                                .resizable()
+                                .frame(width: 100, height: 100, alignment: .center)
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundColor(.pink)
+                                .padding()
+                        }
+                        NavigationLink(
+                            destination: settingsPage(),
+                            label: {
+                                nextButton(color:.pink)})
+                    }
+                    )
         }
     }
 }
