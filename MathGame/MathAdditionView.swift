@@ -48,150 +48,176 @@ struct HardAddition: View {
         VStack {
             
             HStack {
-                Spacer(minLength: 160)
-
-                TextField("0", text: $value1)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
                 
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .foregroundColor(game.getTextColor(value:value1, correctValue:oneRemainder))
-                    
+                NavigationLink(
+                    destination: ContentView().navigationBarBackButtonHidden(true),
+                    label: {
+                        Text("Home")
+                            .frame(width: 110, height: 50, alignment: .center)
+                            .foregroundColor(.blue)
+                            .cornerRadius(10)
+                        
+                    }).position(x: 50, y: 10)
                 
-                TextField("0", text: $value2)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .foregroundColor(game.getTextColor(value:value2, correctValue:tenRemainder))
-                    
-                Spacer(minLength: 140)
+                NavigationLink(
+                    destination: settingsPage().navigationBarBackButtonHidden(true),
+                    label: {
+                        Text("Settings")
+                            .frame(width: 110, height: 50, alignment: .center)
+                            .foregroundColor(.blue)
+                            .cornerRadius(10)
+                        
+                    }).position(x: 130, y: 10)
             }
-            .padding(.bottom, -20)
+
             
-            VStack (alignment: .leading, spacing: 5) {
-     
+            VStack {
+                
                 HStack {
                     Spacer(minLength: 160)
-                    ForEach(firstNumDigits, id: \.self) { digit in
-                        Text("\(digit) ")
-                            .font(.system(size: 55, weight: .ultraLight, design: .default))
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                    }
-                    Spacer(minLength: 90)
-                }
-                HStack {
-                    Spacer()
-                    Text("+")
+
+                    TextField("0", text: $value1)
                         .font(.system(size: 55, weight: .ultraLight, design: .default))
                         .multilineTextAlignment(.center)
-                    Spacer(minLength: 270)
+                        .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray, lineWidth: 1))
+                    
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(game.getTextColor(value:value1, correctValue:oneRemainder))
+                        
+                    
+                    TextField("0", text: $value2)
+                        .font(.system(size: 55, weight: .ultraLight, design: .default))
+                        .multilineTextAlignment(.center)
+                        .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray, lineWidth: 1))
+                    
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(game.getTextColor(value:value2, correctValue:tenRemainder))
+                        
+                    Spacer(minLength: 140)
                 }
-                .padding(.top, -30)
-                .padding(.bottom, -30)
-
-                HStack {
-                    Spacer(minLength: 160)
-                    ForEach(secondNumDigits, id: \.self) { digit in
-                        Text("\(digit) ")
+                .padding(.bottom, -20)
+                
+                VStack (alignment: .leading, spacing: 5) {
+         
+                    HStack {
+                        Spacer(minLength: 160)
+                        ForEach(firstNumDigits, id: \.self) { digit in
+                            Text("\(digit) ")
+                                .font(.system(size: 55, weight: .ultraLight, design: .default))
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }
+                        Spacer(minLength: 90)
+                    }
+                    HStack {
+                        Spacer()
+                        Text("+")
                             .font(.system(size: 55, weight: .ultraLight, design: .default))
                             .multilineTextAlignment(.center)
-                        Spacer()
+                        Spacer(minLength: 270)
                     }
-                    Spacer(minLength: 90)
-                }
-            }
-            
-            Divider()
-                .background(Color.black)
-                .frame(height: 4)
-                .padding(.horizontal)
-                .frame(width: 250)
-                .padding(.top, -25)
-            
-            HStack {
-                Spacer(minLength: 120)
-                
-                TextField("0", text: $value3)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .foregroundColor(game.getTextColor(value:value3, correctValue:thousands))
-                    
-                
-                TextField("0", text: $value4)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .foregroundColor(game.getTextColor(value:value4, correctValue:hundreds))
-                    
-                
-                TextField("0", text: $value5)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .foregroundColor(game.getTextColor(value:value5, correctValue:tens))
-                    
-                
+                    .padding(.top, -30)
+                    .padding(.bottom, -30)
 
-                TextField("0", text: $value6)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                    
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .foregroundColor(game.getTextColor(value:value6, correctValue:ones))
-                    
+                    HStack {
+                        Spacer(minLength: 160)
+                        ForEach(secondNumDigits, id: \.self) { digit in
+                            Text("\(digit) ")
+                                .font(.system(size: 55, weight: .ultraLight, design: .default))
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }
+                        Spacer(minLength: 90)
+                    }
+                }
                 
-                Spacer(minLength: 95)
-            }
-            .padding(.top, -20)
-            
-            ZStack {
-                if game.userAnswerCorrect(onesString:value6, tensString:value5, hundredsString:value4, thousandsString:value3, correctAnswer: correctAnswer) {
-                    RoundedRectangle(cornerRadius: 16)
-                        .foregroundColor(Color.green)
-                        .frame(width: 250, height: 250)
-                        .overlay(
-                            VStack {
-                                Text("Correct!").font(.largeTitle)
-                                
-                                //EDITING STARTS HERE
-                                
-                                //insert next button here
-                                HStack() {
-                                    //next button
-                                    NavigationLink(
-                                        destination: HardAddition(),
-                                        label: {
-                                            nextButton(color:.pink)})
-                                    //home button
-                                    NavigationLink(
-                                        destination: ContentView(),
-                                        label: {
-                                            nextButton(color:.pink)})
-                                }
-                            })
+                Divider()
+                    .background(Color.black)
+                    .frame(height: 4)
+                    .padding(.horizontal)
+                    .frame(width: 250)
+                    .padding(.top, -25)
+                
+                HStack {
+                    Spacer(minLength: 120)
+                    
+                    TextField("0", text: $value3)
+                        .font(.system(size: 55, weight: .ultraLight, design: .default))
+                        .multilineTextAlignment(.center)
+                        .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray, lineWidth: 1))
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(game.getTextColor(value:value3, correctValue:thousands))
+                        
+                    
+                    TextField("0", text: $value4)
+                        .font(.system(size: 55, weight: .ultraLight, design: .default))
+                        .multilineTextAlignment(.center)
+                        .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray, lineWidth: 1))
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(game.getTextColor(value:value4, correctValue:hundreds))
+                        
+                    
+                    TextField("0", text: $value5)
+                        .font(.system(size: 55, weight: .ultraLight, design: .default))
+                        .multilineTextAlignment(.center)
+                        .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray, lineWidth: 1))
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(game.getTextColor(value:value5, correctValue:tens))
+                        
+                    
+
+                    TextField("0", text: $value6)
+                        .font(.system(size: 55, weight: .ultraLight, design: .default))
+                        .multilineTextAlignment(.center)
+                        .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray, lineWidth: 1))
+                        
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(game.getTextColor(value:value6, correctValue:ones))
+                        
+                    
+                    Spacer(minLength: 95)
+                }
+                .padding(.top, -20)
+                
+                ZStack {
+                    if game.userAnswerCorrect(onesString:value6, tensString:value5, hundredsString:value4, thousandsString:value3, correctAnswer: correctAnswer) {
+                        RoundedRectangle(cornerRadius: 16)
+                            .foregroundColor(Color.green)
+                            .frame(width: 250, height: 200)
+                            .overlay(
+                                VStack {
+                                    Text("Correct!").font(.largeTitle)
+                                    
+                                    HStack() {
+                                        //next button
+                                        NavigationLink(
+                                            destination: HardAddition().navigationBarBackButtonHidden(true),
+                                            label: {
+                                                Text("Next Problem")
+                                                    .frame(width: 200, height: 50, alignment: .center)
+                                                    .background(.pink)
+                                                    .foregroundColor(.white)
+                                                    .cornerRadius(10)
+                                            })
+                                    }
+                        })
+                            .position(x: 200, y: 110)
+                    }
                 }
             }
+            Spacer(minLength: 225)
         }
     }
 }
@@ -215,7 +241,7 @@ struct MediumAddition: View {
         let oneRemainder = (firstNumDigits[1] + secondNumDigits[1]) / 10
 
         VStack {
-            
+
             HStack {
                 Spacer(minLength: 160)
                 
@@ -316,6 +342,20 @@ struct MediumAddition: View {
                         .overlay(
                             VStack {
                                 Text("Correct!").font(.largeTitle)
+                                
+                                HStack() {
+                                    //next button
+                                    NavigationLink(
+                                        destination: MediumAddition(),
+                                        label: {
+                                            Text("Next Problem")
+                                                .frame(width: 110, height: 50, alignment: .center)
+                                                .background(.pink)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(10)
+                                        })
+                                    
+                                }
                             }
                         )
                 }
@@ -415,6 +455,31 @@ struct EasyAddition: View {
                         .overlay(
                             VStack {
                                 Text("Correct!").font(.largeTitle)
+                                
+                                HStack() {
+                                    //next button
+                                    NavigationLink(
+                                        destination: EasyAddition(),
+                                        label: {
+                                            Text("Next Problem")
+                                                .frame(width: 110, height: 50, alignment: .center)
+                                                .background(.pink)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(10)
+                                        })
+                                    
+                                    //home button
+                                    NavigationLink(
+                                        destination: ContentView().navigationBarBackButtonHidden(true),
+                                        label: {
+                                            Text("Home")
+                                                .frame(width: 110, height: 50, alignment: .center)
+                                                .background(.blue)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(10)
+                                            
+                                        })
+                                }
                             }
                         )
                 }
@@ -423,13 +488,4 @@ struct EasyAddition: View {
     }
     
     @State private var borderColor = Color.gray
-}
-
-struct WrongTextBox: View {
-    @State var input:String
-    
-    var body: some View {
-        Text(input).font(.system(size: 55, weight: .ultraLight, design: .default))
-            .border(Color.red)
-    }
 }

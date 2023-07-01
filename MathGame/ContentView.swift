@@ -80,6 +80,8 @@ struct settingsPage: View {
     var body: some View {
         VStack {
             
+            Spacer(minLength: 10)
+            
             Text("Select Level")
                 .font(.system(size: 36, weight: .ultraLight, design: .default))
             
@@ -102,15 +104,15 @@ struct settingsPage: View {
             
             switch (difficulty, operation) {
             case (1, "Addition"):
-                NavigationLink(destination: EasyAddition(), label: {
+                NavigationLink(destination: EasyAddition().navigationBarBackButtonHidden(true), label: {
                     nextButton(color: .pink)
                 })
             case (2, "Addition"):
-                NavigationLink(destination: MediumAddition(), label: {
+                NavigationLink(destination: MediumAddition().navigationBarBackButtonHidden(true), label: {
                     nextButton(color: .green)
                 })
             case (3, "Addition"):
-                NavigationLink(destination: HardAddition(), label: {
+                NavigationLink(destination: HardAddition().navigationBarBackButtonHidden(true), label: {
                     nextButton(color: .blue)
                 })
             default:
