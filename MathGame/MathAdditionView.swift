@@ -16,6 +16,9 @@ struct MathAdditionView: View {
 struct MathAdditionView_Previews: PreviewProvider {
     static var previews: some View {
         MathAdditionView()
+        HardAddition()
+        MediumAddition()
+        EasyAddition()
     }
 }
 
@@ -170,8 +173,23 @@ struct HardAddition: View {
                         .overlay(
                             VStack {
                                 Text("Correct!").font(.largeTitle)
-                            }
-                        )
+                                
+                                //EDITING STARTS HERE
+                                
+                                //insert next button here
+                                HStack() {
+                                    //next button
+                                    NavigationLink(
+                                        destination: HardAddition(),
+                                        label: {
+                                            nextButton(color:.pink)})
+                                    //home button
+                                    NavigationLink(
+                                        destination: ContentView(),
+                                        label: {
+                                            nextButton(color:.pink)})
+                                }
+                            })
                 }
             }
         }
@@ -413,15 +431,5 @@ struct WrongTextBox: View {
     var body: some View {
         Text(input).font(.system(size: 55, weight: .ultraLight, design: .default))
             .border(Color.red)
-    }
-}
-
-struct MathOperationsView_Previews: PreviewProvider {
-    static var previews: some View {
-        MathAdditionView()
-        HardAddition()
-        MediumAddition()
-        EasyAddition()
-            
     }
 }

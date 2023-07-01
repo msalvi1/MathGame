@@ -70,29 +70,53 @@ struct nextButton: View {
 }
 
 struct settingsPage: View {
+    
+    @State private var selectedLevel = 0
+    @State private var selectedOperation = 0
+    
+    let levels = [1, 2, 3]
+    let operations = ["Addition", "Subtraction", "Multiplication", "Division"]
+    
     var body: some View {
-        @State var level = 0
-        @State var operation = "Addition"
-        
-        NavigationView{
-            VStack {
-                Text("Select Level")
-                    .font(.system(size: 36, weight: .ultraLight, design: .default))
-                
-                Picker("Level", selection: $level) {
-                    ForEach(1..<4) {
-                        Text("\($0)")
-                    }
-                }.pickerStyle(.wheel)
-                
-                Text("Select Operation").font(.system(size: 36, weight: .ultraLight, design: .default))
-                
-                Picker("Operation", selection: $operation) {
-                    Text("Addition")
-                    Text("Subtraction")
-                    Text("Multiplication")
-                    Text("Division")
-                }.pickerStyle(.wheel)
+        VStack {
+            
+            Text("Select Level")
+                .font(.system(size: 36, weight: .ultraLight, design: .default))
+            
+            Picker (selection: $selectedLevel, label: Text("Level")) {
+                ForEach(1..<4) {
+                    Text("\($0)")
+                }
+            }.pickerStyle(.wheel)
+            
+            Text("Select Operation").font(.system(size: 36, weight: .ultraLight, design: .default))
+            
+            Picker (selection: $selectedOperation, label: Text("Operation")) {
+                ForEach(0 ..< 4) {
+                    Text(operations[$0])
+                }
+            }.pickerStyle(.wheel)
+            
+            let difficulty = levels[selectedLevel], operation = operations[selectedOperation]
+            @State var destinationView: AnyView?
+            
+            switch (difficulty, operation) {
+            case (1, "Addition"):
+                NavigationLink(destination: EasyAddition(), label: {
+                    nextButton(color: .pink)
+                })
+            case (2, "Addition"):
+                NavigationLink(destination: MediumAddition(), label: {
+                    nextButton(color: .green)
+                })
+            case (3, "Addition"):
+                NavigationLink(destination: HardAddition(), label: {
+                    nextButton(color: .blue)
+                })
+            default:
+                NavigationLink(destination: EmptyView(), label: {
+                    nextButton(color: .red)
+                })
             }
         }
     }
@@ -101,5 +125,6 @@ struct settingsPage: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+        settingsPage()
     }
 }
