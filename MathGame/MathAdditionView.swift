@@ -57,7 +57,7 @@ struct HardAddition: View {
                             .foregroundColor(.blue)
                             .cornerRadius(10)
                         
-                    }).position(x: 50, y: 10)
+                    }).position(x: 50, y: 20)
                 
                 NavigationLink(
                     destination: settingsPage().navigationBarBackButtonHidden(true),
@@ -67,7 +67,7 @@ struct HardAddition: View {
                             .foregroundColor(.blue)
                             .cornerRadius(10)
                         
-                    }).position(x: 130, y: 10)
+                    }).position(x: 130, y: 20)
             }
 
             
