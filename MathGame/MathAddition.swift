@@ -110,7 +110,7 @@ class Game {
         var firstNumCopy:Int = problem[0], secondNumCopy:Int = problem[1], carryDigit:Int = 0
         
         while (firstNumCopy != 0 || secondNumCopy != 0) {
-            var firstNumDigit = firstNumCopy%10, secondNumDigit = secondNumCopy%10, currDigit = (firstNumDigit + secondNumDigit)%10 + carryDigit
+            let firstNumDigit = firstNumCopy%10, secondNumDigit = secondNumCopy%10, currDigit = (firstNumDigit + secondNumDigit)%10 + carryDigit
             answerDigits.insert(currDigit, at: 0)
             carryDigit = (firstNumDigit + secondNumDigit + carryDigit)/10
             carryDigits.insert(carryDigit, at: 0)

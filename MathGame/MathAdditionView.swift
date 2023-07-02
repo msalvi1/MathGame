@@ -338,7 +338,7 @@ struct MediumAddition: View {
                 if game.userAnswerCorrect(onesString:value4, tensString:value3, hundredsString:value2, thousandsString:"0", correctAnswer: correctAnswer) {
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundColor(Color.green)
-                        .frame(width: 250, height: 250)
+                        .frame(width: 250, height: 200)
                         .overlay(
                             VStack {
                                 Text("Correct!").font(.largeTitle)
@@ -349,7 +349,7 @@ struct MediumAddition: View {
                                         destination: MediumAddition(),
                                         label: {
                                             Text("Next Problem")
-                                                .frame(width: 110, height: 50, alignment: .center)
+                                                .frame(width: 200, height: 50, alignment: .center)
                                                 .background(.pink)
                                                 .foregroundColor(.white)
                                                 .cornerRadius(10)
@@ -451,7 +451,7 @@ struct EasyAddition: View {
                 if game.userAnswerCorrect(onesString:value2, tensString:value1, hundredsString:"0", thousandsString:"0", correctAnswer: correctAnswer) {
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundColor(Color.green)
-                        .frame(width: 250, height: 250)
+                        .frame(width: 250, height: 200)
                         .overlay(
                             VStack {
                                 Text("Correct!").font(.largeTitle)
@@ -473,7 +473,7 @@ struct EasyAddition: View {
                                         destination: ContentView().navigationBarBackButtonHidden(true),
                                         label: {
                                             Text("Home")
-                                                .frame(width: 110, height: 50, alignment: .center)
+                                                .frame(width: 200, height: 50, alignment: .center)
                                                 .background(.blue)
                                                 .foregroundColor(.white)
                                                 .cornerRadius(10)
