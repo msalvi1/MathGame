@@ -72,6 +72,20 @@ struct HardAddition: View {
 
             
             VStack {
+                HStack() {
+                    //generate new problem button
+                    NavigationLink(
+                        destination: HardAddition(),
+                        label: {
+                            Text("Generate New Problem")
+                                .frame(width: 200, height: 50, alignment: .center)
+                                .background(.pink)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        })
+                    
+                }
+                Spacer(minLength: 160)
                 
                 HStack {
                     Spacer(minLength: 160)
@@ -84,7 +98,7 @@ struct HardAddition: View {
                     
                         .keyboardType(.numberPad)
                         .textContentType(.oneTimeCode)
-                        .foregroundColor(game.getTextColor(value:value1, correctValue:oneRemainder))
+                        .foregroundColor(game.getTextColor(value:value1, correctValue:tenRemainder))
                         
                     
                     TextField("0", text: $value2)
@@ -95,7 +109,7 @@ struct HardAddition: View {
                     
                         .keyboardType(.numberPad)
                         .textContentType(.oneTimeCode)
-                        .foregroundColor(game.getTextColor(value:value2, correctValue:tenRemainder))
+                        .foregroundColor(game.getTextColor(value:value2, correctValue:oneRemainder))
                         
                     Spacer(minLength: 140)
                 }
@@ -192,7 +206,7 @@ struct HardAddition: View {
                 .padding(.top, -20)
                 
                 ZStack {
-                    if game.userAnswerCorrect(onesString:value6, tensString:value5, hundredsString:value4, thousandsString:value3, correctAnswer: correctAnswer) {
+                    if game.userAnswerCorrect(onesString:value6, tensString:value5, hundredsString:value4, thousandsString:value3, correctAnswer: correctAnswer, onesRemainderString:value2, tensRemainderString:value1, correctRemainderOne:oneRemainder, correctRemainderTen:tenRemainder) {
                         RoundedRectangle(cornerRadius: 16)
                             .foregroundColor(Color.green)
                             .frame(width: 250, height: 200)
@@ -241,124 +255,162 @@ struct MediumAddition: View {
         let oneRemainder = (firstNumDigits[1] + secondNumDigits[1]) / 10
 
         VStack {
-
             HStack {
-                Spacer(minLength: 160)
                 
-                TextField("0", text: $value1)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .foregroundColor(game.getTextColor(value:value1, correctValue:oneRemainder))
+                NavigationLink(
+                    destination: ContentView().navigationBarBackButtonHidden(true),
+                    label: {
+                        Text("Home")
+                            .frame(width: 110, height: 50, alignment: .center)
+                            .foregroundColor(.blue)
+                            .cornerRadius(10)
+                        
+                    }).position(x: 50, y: 20)
                 
-                Spacer(minLength: 175)
+                NavigationLink(
+                    destination: settingsPage().navigationBarBackButtonHidden(true),
+                    label: {
+                        Text("Settings")
+                            .frame(width: 110, height: 50, alignment: .center)
+                            .foregroundColor(.blue)
+                            .cornerRadius(10)
+                        
+                    }).position(x: 130, y: 20)
             }
-            .padding(.bottom, -20)
-            
-            VStack (alignment: .leading, spacing: 5) {
-     
+            VStack() {
+                HStack() {
+                    //generate new problem button
+                    NavigationLink(
+                        destination: MediumAddition(),
+                        label: {
+                            Text("Generate New Problem")
+                                .frame(width: 200, height: 50, alignment: .center)
+                                .background(.pink)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        })
+                    
+                }
+
                 HStack {
                     Spacer(minLength: 160)
-                    ForEach(firstNumDigits, id: \.self) { digit in
-                        Text("\(digit) ")
-                            .font(.system(size: 55, weight: .ultraLight, design: .default))
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                    }
-                    Spacer(minLength: 90)
-                }
-                HStack {
-                    Spacer()
-                    Text("+")
+                    
+                    TextField("0", text: $value1)
                         .font(.system(size: 55, weight: .ultraLight, design: .default))
                         .multilineTextAlignment(.center)
-                    Spacer(minLength: 270)
+                        .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray, lineWidth: 1))
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(game.getTextColor(value:value1, correctValue:oneRemainder))
+                    
+                    Spacer(minLength: 175)
                 }
-                .padding(.top, -30)
-                .padding(.bottom, -30)
-
-                HStack {
-                    Spacer(minLength: 160)
-                    ForEach(secondNumDigits, id: \.self) { digit in
-                        Text("\(digit) ")
+                .padding(.bottom, -20)
+                
+                VStack (alignment: .leading, spacing: 5) {
+         
+                    HStack {
+                        Spacer(minLength: 160)
+                        ForEach(firstNumDigits, id: \.self) { digit in
+                            Text("\(digit) ")
+                                .font(.system(size: 55, weight: .ultraLight, design: .default))
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }
+                        Spacer(minLength: 90)
+                    }
+                    HStack {
+                        Spacer()
+                        Text("+")
                             .font(.system(size: 55, weight: .ultraLight, design: .default))
                             .multilineTextAlignment(.center)
-                        Spacer()
+                        Spacer(minLength: 270)
                     }
-                    Spacer(minLength: 90)
+                    .padding(.top, -30)
+                    .padding(.bottom, -30)
+
+                    HStack {
+                        Spacer(minLength: 160)
+                        ForEach(secondNumDigits, id: \.self) { digit in
+                            Text("\(digit) ")
+                                .font(.system(size: 55, weight: .ultraLight, design: .default))
+                                .multilineTextAlignment(.center)
+                            Spacer()
+                        }
+                        Spacer(minLength: 90)
+                    }
                 }
-            }
-            
-            Divider()
-                .background(Color.black)
-                .frame(height: 4)
-                .padding(.horizontal)
-                .frame(width: 250)
-                .padding(.top, -25)
-            
-            HStack {
-                Spacer(minLength: 105)
                 
-                TextField("0", text: $value2)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .foregroundColor(game.getTextColor(value:value2, correctValue:hundreds))
+                Divider()
+                    .background(Color.black)
+                    .frame(height: 4)
+                    .padding(.horizontal)
+                    .frame(width: 250)
+                    .padding(.top, -25)
                 
+                HStack {
+                    Spacer(minLength: 105)
+                    
+                    TextField("0", text: $value2)
+                        .font(.system(size: 55, weight: .ultraLight, design: .default))
+                        .multilineTextAlignment(.center)
+                        .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray, lineWidth: 1))
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(game.getTextColor(value:value2, correctValue:hundreds))
+                    
+                    
+                    TextField("0", text: $value3)
+                        .font(.system(size: 55, weight: .ultraLight, design: .default))
+                        .multilineTextAlignment(.center)
+                        .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray, lineWidth: 1))
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(game.getTextColor(value:value3, correctValue:tens))
+                    
+                    TextField("0", text: $value4)
+                        .font(.system(size: 55, weight: .ultraLight, design: .default))
+                        .multilineTextAlignment(.center)
+                        .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray, lineWidth: 1))
+                        .keyboardType(.numberPad)
+                        .textContentType(.oneTimeCode)
+                        .foregroundColor(game.getTextColor(value:value4, correctValue:ones))
+                    
+                    Spacer(minLength: 115)
+                }
+                .padding(.top, -20)
                 
-                TextField("0", text: $value3)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .foregroundColor(game.getTextColor(value:value3, correctValue:tens))
-                
-                TextField("0", text: $value4)
-                    .font(.system(size: 55, weight: .ultraLight, design: .default))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color.gray, lineWidth: 1))
-                    .keyboardType(.numberPad)
-                    .textContentType(.oneTimeCode)
-                    .foregroundColor(game.getTextColor(value:value4, correctValue:ones))
-                
-                Spacer(minLength: 115)
-            }
-            .padding(.top, -20)
-            
-            ZStack {
-                if game.userAnswerCorrect(onesString:value4, tensString:value3, hundredsString:value2, thousandsString:"0", correctAnswer: correctAnswer) {
-                    RoundedRectangle(cornerRadius: 16)
-                        .foregroundColor(Color.green)
-                        .frame(width: 250, height: 200)
-                        .overlay(
-                            VStack {
-                                Text("Correct!").font(.largeTitle)
-                                
-                                HStack() {
-                                    //next button
-                                    NavigationLink(
-                                        destination: MediumAddition(),
-                                        label: {
-                                            Text("Next Problem")
-                                                .frame(width: 200, height: 50, alignment: .center)
-                                                .background(.pink)
-                                                .foregroundColor(.white)
-                                                .cornerRadius(10)
-                                        })
+                ZStack {
+                    if game.userAnswerCorrect(onesString:value4, tensString:value3, hundredsString:value2, thousandsString:"0", correctAnswer: correctAnswer, onesRemainderString:value1, tensRemainderString:"0", correctRemainderOne:oneRemainder, correctRemainderTen:0) {
+                        RoundedRectangle(cornerRadius: 16)
+                            .foregroundColor(Color.green)
+                            .frame(width: 250, height: 200)
+                            .overlay(
+                                VStack {
+                                    Text("Correct!").font(.largeTitle)
                                     
+                                    HStack() {
+                                        //next button
+                                        NavigationLink(
+                                            destination: MediumAddition(),
+                                            label: {
+                                                Text("Next Problem")
+                                                    .frame(width: 200, height: 50, alignment: .center)
+                                                    .background(.pink)
+                                                    .foregroundColor(.white)
+                                                    .cornerRadius(10)
+                                            })
+                                        
+                                    }
                                 }
-                            }
-                        )
+                            )
+                    }
                 }
+                
             }
         }
     }
@@ -378,6 +430,19 @@ struct EasyAddition: View {
         let correctAnswer = ones + (10 * tens)
 
         VStack {
+            HStack() {
+                //generate new problem button
+                NavigationLink(
+                    destination: EasyAddition(),
+                    label: {
+                        Text("Generate New Problem")
+                            .frame(width: 200, height: 50, alignment: .center)
+                            .background(.pink)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    })
+                
+            }
             
             VStack (alignment: .leading, spacing: 5) {
      
@@ -448,7 +513,7 @@ struct EasyAddition: View {
             .padding(.top, -20)
             
             ZStack {
-                if game.userAnswerCorrect(onesString:value2, tensString:value1, hundredsString:"0", thousandsString:"0", correctAnswer: correctAnswer) {
+                if game.userAnswerCorrect(onesString:value2, tensString:value1, hundredsString:"0", thousandsString:"0", correctAnswer: correctAnswer, onesRemainderString:"0", tensRemainderString:"0", correctRemainderOne: 0, correctRemainderTen: 0) {
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundColor(Color.green)
                         .frame(width: 250, height: 200)

@@ -125,23 +125,25 @@ class Game {
     }
     
     public func getTextColor(value:String, correctValue:Int) -> Color {
-            let intCorrect = String(correctValue)
-           if value == intCorrect {
+            let intValue = Int(value) ?? -1
+           if intValue == correctValue {
                return .green // Red color if input is less than 5 characters
            } else {
                return .red // Green color if input is 5 or more characters
            }
     }
     
-    public func userAnswerCorrect(onesString:String, tensString:String, hundredsString:String, thousandsString:String, correctAnswer:Int) -> Bool {
+    public func userAnswerCorrect(onesString:String, tensString:String, hundredsString:String, thousandsString:String, correctAnswer:Int, onesRemainderString:String, tensRemainderString:String, correctRemainderOne:Int, correctRemainderTen:Int) -> Bool {
         let ones = Int(onesString) ?? -1
         let tens = Int(tensString) ?? -1
         let hundreds = Int(hundredsString) ?? -1
         let thousands = Int(thousandsString) ?? -1
+        let onesRemainder = Int(onesRemainderString) ?? -1
+        let tensRemainder = Int(tensRemainderString) ?? -1
         
         let userAnswer = ones + (10*tens) + (100*hundreds) + (1000*thousands)
         
-        return userAnswer == correctAnswer
+        return userAnswer == correctAnswer && onesRemainder == correctRemainderOne && tensRemainder == correctRemainderTen
     }
    
 }
